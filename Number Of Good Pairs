@@ -1,0 +1,63 @@
+// Time Complexity O(n2) //
+
+
+
+class Solution {
+public:
+    int numIdenticalPairs(vector<int>& nums) {
+        int count = 0;
+        for(int i=0; i<nums.size()-1; i++){
+            for(int j=i+1; j<nums.size(); j++){
+                if(nums[i] == nums[j]){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+};
+
+
+
+// Time Complexity O(n) //
+
+
+class Solution {
+public:
+    int numIdenticalPairs(vector<int>& nums) {
+        int res = 0;
+        unordered_map<int, int> count;
+        for (int a: A) {
+            res += count[a]++;
+        }
+        return res;
+};
+
+    
+    /*
+    Suppose original => arr = [1,1,2,1,2,2,1,1]
+
+Create a array of 1  E.g. {1,1,1,1,1}
+Where arr[i]=arr[j], i < j their will be (4+3+2+1) = 10 
+
+if we reverse the sequence i.e 1 + 2 + 3 + 4 = (n+1)* n / 2
+so n = 4 in this case => (4+1)*4/2 =  (5)*4 / 2 = 10. 
+
+Now to make use of the formula, we can utilize the frequency of the number for 1 i.e 5 , therefore, we can do (count-1)*count/2 = (4) * 5/ 2 = 10.   ---- (I)
+
+
+Create an array of 2  E.g. {2,2,2} 
+Where arr[i]=arr[j], i < j their will be (2+1) = 3
+so n = 2 in this case => (2 + 1) * 2 / 2 => 3
+
+Now to make use of the formula, we can utilize the frequency of the number for 2 i.e 3 , therefore, we can do (count-1)*count/2 = (2) *  3/ 2 = 2.   ---- (II)
+
+Now add I and II  :- 10 + 3 = 13 
+
+Here we are using the dictionary to get the frequency of the number eg : [1, 2, 3, 1, 1, 3] 
+
+key = number, value =  count of the number
+d = {1 : 3, 2 : 1, 3 : 2} 
+
+Now use the values of the key and apply in this formula (count-1)*count/2 and add them all.
+*/
