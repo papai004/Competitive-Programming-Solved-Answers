@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int mostWordsFound(vector<string>& sentences) {
+        int num = 1;
+        int maxi = INT_MIN;
+        for(int i=0; i<sentences.size(); i++){
+            num =1;
+            for(int j=0; j<sentences[i].size(); j++){
+                if(sentences[i][j] == ' '){
+                    num++;
+                }
+            }
+            maxi = max(maxi, num);
+        }
+        return maxi;
+    }
+};
