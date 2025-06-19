@@ -1,0 +1,39 @@
+2966. Divide Array Into Arrays With Max Difference
+
+Steps:
+
+1. Sort the array.
+2. Travarse the array +3 positions.
+3. if condition does't match i.e last element - first element of that three elements > k simply return empty array.
+4. push those three element into a new dummy array and push that dummy array into actual array.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const arr = nums.sort((a, b) => a - b);
+    const ans = [];
+    for (let i = 0; i < arr.length; i += 3) {
+        if (i + 2 > arr.length || arr[i + 2] - arr[i] > k) {
+            return [];
+        }
+        let dummy = [arr[i], arr[i + 1], arr[i + 2]];
+        ans.push(dummy);
+    }
+return ans;
