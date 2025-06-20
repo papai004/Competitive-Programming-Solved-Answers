@@ -1,0 +1,52 @@
+3443. Maximum Manhattan Distance After K Changes
+
+Step-by-Step Approach
+1. Initialize Counters (north, south, east, west) to 0.
+
+2. Iterate Through Each Movement in str:
+
+Update the respective direction counter.
+Calculate x = east - west and y = north - south.
+Compute MD = |x| + |y|.
+3 . Maximize MD Using k Changes:
+
+The potential increase is 2 * k (if all changes optimally increase MD).
+However, we cannot change more directions than movements processed (i + 1).
+Hence, the actual increase is min(2 * k, (i + 1) - MD).
+Update Maximum Distance (ans) if the computed distance (MD + increase) is greater.
+
+Why (i + 1) - MD?
+i + 1 = number of movements processed.
+MD = current Manhattan Distance.
+(i + 1) - MD =** number of changes needed** to align all movements in the same direction (maximizing MD).
+
+
+
+
+
+
+
+
+    let n = 0;
+    let s = 0;
+    let e = 0;
+    let w = 0;
+    let maxMD = 0;
+
+    for(let i=0; i<str.length; i++){
+        if(str[i] == 'N') n++;
+        else if(str[i] == 'S') s++;
+        else if(str[i] == 'E') e++;
+        else if(str[i] == 'W') w++;
+
+        let currMD = Math.abs(e-w) + Math.abs(n-s);
+        let steps = i+1;
+        let wasted = steps - currMD;
+        let extra = 0;
+        if(wasted != 0) {
+            extra = Math.min(k*2,wasted);
+        }
+        let finalMD = currMD + extra;
+        maxMD = Math.max(maxMD,finalMD);
+    }
+    return maxMD;
