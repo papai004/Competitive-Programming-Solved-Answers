@@ -1,0 +1,60 @@
+var isPalindrome = function(baseK) {
+    let left = 0;
+    let right = baseK.length - 1;
+    while (left < right) {
+        if (baseK[left] !== baseK[right]) {
+            return false;
+        }
+        left++;
+        right--;
+    }
+    return true;
+};
+
+var convertToBaseK = function(pal, k) {
+    let basek = "";
+    while (pal > 0) {
+        basek = (pal % k).toString() + basek;
+        pal = Math.floor(pal / k);
+    }
+    return basek;
+};
+
+var kMirror = function(k, n) {
+    let sum = 0;
+    let L = 1;
+
+    while (n > 0) {
+        let half_length = Math.floor((L + 1) / 2);
+        let min_number = Math.pow(10, half_length - 1);
+        let max_number = Math.pow(10, half_length) - 1;
+
+        for (let num = min_number; num <= max_number; num++) {
+            let first_half = num.toString();
+            let second_half = first_half.split('').reverse().join('');
+
+            let pal = "";
+            if (L % 2 === 0) {
+                pal = first_half + second_half;
+            } else {
+                pal = first_half + second_half.slice(1);
+            }
+
+            let pal_num = parseInt(pal);
+            const baseK = convertToBaseK(pal_num, k);
+
+            if (isPalindrome(baseK)) {
+                sum += pal_num;
+                n--;
+                if (n === 0) {
+                    break;
+                }
+            }
+        }
+        L++;
+    }
+
+    return sum;
+};
+
+
