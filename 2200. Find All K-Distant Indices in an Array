@@ -1,0 +1,46 @@
+
+Approach:
+1. Loop through nums to find all key positions.
+2. For each position, compute the [i - k, i + k] window.
+3. Check for the negetive and out of bound indices.
+4. Add all indices in that window to the result.
+5. Avoid duplicates using last added index.
+6. Return the list of indices that are within k distance of any key.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var findKDistantIndices = function (nums, key, k) {
+    const ans = [];
+    const n = nums.length;
+    for (let i = 0; i < n; i++) {
+        if (nums[i] == key) {
+            let start = Math.max(i - k, 0);
+            let end = Math.min(i + k, n - 1);
+            if (ans[ans.length - 1] >= start) {
+                start = ans[ans.length - 1] + 1;
+            }
+            for (let j = start; j <= end; j++) {
+                ans.push(j);
+            }
+        }
+    }
+    return ans;
+};
