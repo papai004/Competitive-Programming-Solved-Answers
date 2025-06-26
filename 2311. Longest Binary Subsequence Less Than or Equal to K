@@ -1,0 +1,45 @@
+Approach:
+1. We will traverse from right to left since digits on the right have lower significance (smaller value).
+2. If the digit is "0" we simply increase the count because 0 * anything is 0;
+3. If we counter "1" we will check if the power of 2 of that position is less than or == K.
+4. If it is we increase the count and decrease the value of K i.e K = K - pow(2,n-i-1) {where n is the length of string}
+5. If the power value is bigger than K, we will simply ignore it, since we don't need continious subsequene. We can skip any middle digit.
+6. Return the count.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var longestSubsequence = function(s, k) {
+    let count = 0;
+    const n = s.length;
+    for(let i=n-1; i>=0; i--){
+        if(s[i] == '1'){
+            let num = Math.pow(2,n-i-1);
+            if(num <= k){
+                count++;
+                k = k-num;
+            }
+        }else{
+            count++;
+        }
+    }
+    return count;
+};
