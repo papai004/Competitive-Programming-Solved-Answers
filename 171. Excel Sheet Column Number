@@ -1,0 +1,37 @@
+Approach:
+charCodeAt(i) - 64	Converts char to number (A→1, ..., Z→26)
+Math.pow(26, position)	Handles base-26 logic
+Loop from right to left	Just like computing a decimal number
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var titleToNumber = function(columnTitle) {
+    let ans = 0;
+    const n = columnTitle.length;
+    for(let i=n-1; i>=0; i--){
+        ans+= (columnTitle.charCodeAt(i) - 64) * Math.pow(26, n - (i + 1));
+    }
+    return ans;
+};
