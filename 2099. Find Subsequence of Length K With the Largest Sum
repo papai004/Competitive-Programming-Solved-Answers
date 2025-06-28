@@ -1,0 +1,35 @@
+Approach:
+1. Map the numbers and its indices into a new array.
+2. Sort the new array in descending order by its values(i.e nums);
+3. Take top kth elements into another array.
+4. Sort that array by indices.
+5. Return the array.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var maxSubsequence = function(nums, k) {
+    let numsWithIndices = nums.map((num,idx) => [num, idx]);
+    numsWithIndices.sort((a,b) => b[0] - a[0]);
+    let topK = numsWithIndices.slice(0,k).sort((a,b) => a[1] - b[1]);
+    return topK.map((val, idx) => val[0]);
+};
