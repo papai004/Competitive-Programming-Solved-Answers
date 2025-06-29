@@ -1,0 +1,56 @@
+Approach: 
+1.	Track indices of unmatched ( using stack
+2.	Track unmatched ) using a Set
+3.	Add leftover ( from stack to the removal set
+4.	Build a new string skipping all characters at those indices
+5.	Return the cleaned string
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var minRemoveToMakeValid = function (s) {
+    const stack = [];
+    const toRemove = new Set();
+    let ans = "";
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] === "(") {
+            stack.push(i);
+        } else if (s[i] === ")") {
+            if (stack.length > 0) {
+                stack.pop();
+            } else {
+                toRemove.add(i);
+            }
+        }
+    }
+
+    for (let index of stack) {
+        toRemove.add(index);
+    }
+
+    for (let i = 0; i < s.length; i++) {
+        if (!toRemove.has(i)) {
+            ans += s[i];
+        }
+    }
+    return ans;
+};
