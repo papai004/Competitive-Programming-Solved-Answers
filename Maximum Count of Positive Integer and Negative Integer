@@ -1,0 +1,15 @@
+var maximumCount = function(nums) {
+    let negetive = 0;
+    let positive = 0;
+    const n = nums.length;
+
+    for(let i=0; i<n; i++){
+        if(nums[i] > 0){
+            positive++;
+        }
+        if(nums[i] < 0){
+            negetive++;
+        }
+    }
+    return Math.max(positive,negetive);
+};
