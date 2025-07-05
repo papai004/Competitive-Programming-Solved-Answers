@@ -1,0 +1,68 @@
+Approach:
+By Object or Mp
+
+object syntax:
+Insertion: freq[arr[i]] = (freq[arr[i]] || 0) + 1;
+Iterate: for(const key in freq) {...}
+
+Map syntax:
+Insertion: freq.set(arr[i], (freq.get(arr[i]) || 0) + 1);
+Iterate: for(const [values, key] of freq) {...}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var findLucky = function(arr) {
+    let ans = -1;
+    const freq = new Map();
+
+    for(let i=0; i<arr.length; i++){
+        freq.set(arr[i], (freq.get(arr[i]) || 0) + 1);
+    }
+
+    console.log(freq);
+
+    for(const [values, key] of freq){
+        if(key === values){
+            ans = Math.max(ans, key);
+        }
+    }
+    return ans;
+};
+
+
+
+
+var findLucky = function(arr) {
+    let ans = -1;
+    const freq = {};
+
+    for(let i=0; i<arr.length; i++){
+        freq[arr[i]] = (freq[arr[i]] || 0) + 1;
+    }
+
+    console.log(freq);
+
+    for(const key in freq){
+        console.log(freq[key]);
+        if(parseInt(key) === freq[key]){
+            ans = Math.max(ans, key);
+        }
+    }
+    return ans;
+};
