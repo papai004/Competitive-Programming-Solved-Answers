@@ -1,0 +1,52 @@
+Approach:
+1. Store the frequency of nums1(constraints less) in a map.
+2. Add fn: Get the old value index and iterate to map and decrease its count and increase the count of the second value.
+3. Count Fn: take res = 0; iterate over map and find given input - key in map. store its frequency.
+4. Return res.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var FindSumPairs = function(nums1, nums2) {
+    this.num1 = nums1;
+    this.num2 = nums2;
+    this.map = new Map();
+    for (let n of nums2) {
+        this.map.set(n, (this.map.get(n) || 0) + 1);
+    }
+};
+
+FindSumPairs.prototype.add = function(index, val) {
+    let old = this.num2[index];
+    this.map.set(old, this.map.get(old) - 1);
+    this.num2[index] += val;
+    this.map.set(this.num2[index], (this.map.get(this.num2[index]) || 0) + 1);
+};
+
+FindSumPairs.prototype.count = function(tot) {
+    let count = 0;
+    for (let n of this.num1) {
+        count += this.map.get(tot - n) || 0;
+    }
+    return count;
+};
