@@ -1,0 +1,48 @@
+Approach:
+1️⃣ Sort all events by their end day, ascending
+2️⃣ Initialize a Union-Find parent array where each day points to itself
+3️⃣ For each event [start, end]:
+• Use find(start) to locate the earliest free day
+• If that day is ≤ end, attend the event
+• Mark the day as taken by updating parent[day] = find(day + 1)
+4️⃣ Track and return total attended events
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+events.sort((a, b) => a[1] - b[1]);
+
+    const maxDay = Math.max(...events.map(e => e[1]));
+    const size = Math.max(maxDay, events.length) + 2;
+    const parent = Array.from({ length: size }, (_, i) => i);
+
+    const find = d => parent[d] === d ? d : (parent[d] = find(parent[d]));
+
+    let attended = 0;
+    for (let i = 0; i < events.length; i++) {
+        const [start, end] = events[i];
+        const freeDay = find(start);
+        if (freeDay <= end) {
+            attended++;
+            parent[freeDay] = find(freeDay + 1);
+        }
+    }
+
+    return attended;
