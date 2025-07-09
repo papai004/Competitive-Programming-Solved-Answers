@@ -5,7 +5,7 @@ Approach:
 • Use find(start) to locate the earliest free day
 • If that day is ≤ end, attend the event
 • Mark the day as taken by updating parent[day] = find(day + 1)
-4️⃣ Track and return total attended events
+4️⃣ Track and return total attended events.
 
 
 
