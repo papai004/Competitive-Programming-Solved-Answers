@@ -1,0 +1,55 @@
+Approach:
+1. Record last occurrence of each character.
+2. Process each character.
+3. Remove from stack while current char is smaller than top of stack
+4. AND the top of stack char appears later again
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    const lastIndex = {};
+    const stack = [];
+    const seen = new Set();
+
+    for (let i = 0; i < s.length; i++) {
+        lastIndex[s[i]] = i;
+    }
+
+    for (let i = 0; i < s.length; i++) {
+        const ch = s[i];
+
+        if (seen.has(ch)) continue;
+
+        while (
+            stack.length > 0 &&
+            ch < stack[stack.length - 1] &&
+            lastIndex[stack[stack.length - 1]] > i
+        ) {
+            seen.delete(stack.pop());
+        }
+
+        stack.push(ch);
+        seen.add(ch);
+    }
+
+    return stack.join('');
