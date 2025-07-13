@@ -1,0 +1,27 @@
+var leftRightDifference = function (nums) {
+    const leftSum = [];
+    const rightSum = [];
+    const ans = [];
+    leftSum.push(0);
+    rightSum.push(0);
+
+    let left = 0, right = 0;
+
+    for (let i = 0; i < nums.length -1; i++) {
+        left += nums[i];
+        leftSum.push(left);
+    }
+
+    for (let i = nums.length - 1; i > 0; i--) {
+        right += nums[i];
+        rightSum.push(right);
+    }
+
+    rightSum.reverse();
+
+    for(let i=0; i<rightSum.length; i++){
+        ans.push(Math.abs(leftSum[i] - rightSum[i]));
+    }
+
+    return ans;
+};
