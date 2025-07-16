@@ -1,0 +1,61 @@
+Approach:
+1. Find the count of odd and even digits.
+2. Find the count of alternative odd and even digit.
+3. Return the maximum among them.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var maximumLength = function(nums) {
+    let even = 0;
+    let odd = 0;
+    let alterEven = 0;
+    let alterOdd = 0;
+    let hold = 0;
+
+    if(nums[0] % 2 === 1){
+        hold = 1;
+    }
+
+    for(let i=0; i<nums.length; i++){
+        if(nums[i] % 2 === 0){
+            even++;
+        }
+        else{
+            odd++;
+        }
+    }
+
+    for(let i=0; i<nums.length; i++){
+        if (nums[i] % 2 === 0)
+            alterEven = Math.max(alterEven, alterOdd + 1);
+        else
+            alterOdd = Math.max(alterOdd, alterEven + 1);
+    }
+
+    let max1 = Math.max(even,odd);
+    let max2 = Math.max(alterEven, alterOdd);
+
+    return Math.max(max1,max2);
+};
